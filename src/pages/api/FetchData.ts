@@ -2,8 +2,10 @@ import puppeteer from "puppeteer"
 import type { APIRoute } from "astro"
 
 export const GET: APIRoute = async () => {
+  const facebookData: string[] = []
+  const instagramData: string[] = []
   const GENERAL_LABELS_SIZE: number = 5
-  const GENERAL_TABLE_SIZE: number = 9
+  const GENERAL_TABLE_SIZE: number = 11
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   const URL = "https://lookerstudio.google.com/u/0/reporting/36960dab-5e03-4c64-8b14-cf4c76c61e40/page/p_pj1bqu80od?s=spVfW1z_NAs"
@@ -14,8 +16,8 @@ export const GET: APIRoute = async () => {
 
   // Wait for at least one element with the class "valueLabel" to appear
   await Promise.all([
-    page.waitForSelector('div.valueLabel', { timeout: 60000 }),
-    page.waitForSelector('div.cell', { timeout: 60000 }),
+    page.waitForSelector('div.valueLabel', { timeout: 120000 }),
+    page.waitForSelector('div.cell', { timeout: 120000 }),
   ])
 
   // Select all elements with the class "valueLabel"
@@ -50,12 +52,27 @@ export const GET: APIRoute = async () => {
     return acc;
   }, []);
 
+  let isSectionTwo = false
+  for (let chunk of arrayChunked) {
+    console.log(chunk)
+    if (chunk[0] === "1.") {
+      isSectionTwo = !isSectionTwo
+    }
+
+    if (isSectionTwo) {
+      instagramData.push(chunk)
+    } else {
+      facebookData.push(chunk)
+    }
+  }
+
   await browser.close();
 
   return new Response(
     JSON.stringify({
       generalLabels: generalLabels(),
-      metaTables: arrayChunked
+      facebookData: facebookData,
+      instagramData: instagramData
     })
   )
 }
