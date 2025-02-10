@@ -7,7 +7,7 @@ import MetaGeneral from "./MetaGeneral"
 import CarouselGeneral from "./CarouselGeneral"
 
 const GeneralLabels: React.FC = () => {
-  const URL = "http://localhost:8000"
+  const URL = "https://mf-backend-wv8c.onrender.com"
   const [generalLabels, setGeneralLabels] = useState<{ title: string, value: string }[]>([])
   const [facebookData, setFacebookData] = useState<string>("")
   const [instaData, setInstagramData] = useState<string>("")
