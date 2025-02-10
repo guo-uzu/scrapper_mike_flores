@@ -7,6 +7,7 @@ import MetaGeneral from "./MetaGeneral"
 import CarouselGeneral from "./CarouselGeneral"
 
 const GeneralLabels: React.FC = () => {
+  const URL = "http://localhost:8000"
   const [generalLabels, setGeneralLabels] = useState<{ title: string, value: string }[]>([])
   const [facebookData, setFacebookData] = useState<string>("")
   const [instaData, setInstagramData] = useState<string>("")
@@ -25,7 +26,8 @@ const GeneralLabels: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/FetchData")
+        const response = await fetch(`${URL}/endpoints/`)
+        console.log(response)
         if (!response.ok) {
           console.log("Failed to fetch Data")
         }
