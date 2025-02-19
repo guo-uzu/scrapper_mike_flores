@@ -5,9 +5,10 @@ import LogoFb from "../assets/FbLogo.svg"
 import LogoInsta from "../assets/InstaLogo.svg"
 import MetaGeneral from "./MetaGeneral"
 import CarouselGeneral from "./CarouselGeneral"
+import axios from "axios"
 
 const GeneralLabels: React.FC = () => {
-  const URL = "https://mf-backend-wv8c.onrender.com"
+  const URL = "http://localhost:3000/scrape"
   const [generalLabels, setGeneralLabels] = useState<{ title: string, value: string }[]>([])
   const [facebookData, setFacebookData] = useState<string>("")
   const [instaData, setInstagramData] = useState<string>("")
@@ -26,12 +27,8 @@ const GeneralLabels: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${URL}/endpoints/`)
-        console.log(response)
-        if (!response.ok) {
-          console.log("Failed to fetch Data")
-        }
-        const data = await response.json()
+        const { data } = await axios.get(URL)
+        console.log(data)
         setGeneralLabels(data.generalLabels)
         setFacebookData(data.facebookData)
         setInstagramData(data.instagramData)
