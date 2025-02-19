@@ -8,7 +8,7 @@ import CarouselGeneral from "./CarouselGeneral"
 import axios from "axios"
 
 const GeneralLabels: React.FC = () => {
-  const URL = "http://localhost:3000/scrape"
+  const URL = "https://mf-api-71095185658.us-central1.run.app/"
   const [generalLabels, setGeneralLabels] = useState<{ title: string, value: string }[]>([])
   const [facebookData, setFacebookData] = useState<string>("")
   const [instaData, setInstagramData] = useState<string>("")
@@ -27,7 +27,7 @@ const GeneralLabels: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(URL)
+        const { data } = await axios.get(`${URL}scrape/`)
         console.log(data)
         setGeneralLabels(data.generalLabels)
         setFacebookData(data.facebookData)
