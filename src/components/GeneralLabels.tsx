@@ -27,7 +27,9 @@ const GeneralLabels: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${URL}scrape/`)
+        const { data } = await axios.get(`${URL}scrape/`, {
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        })
         console.log(data)
         setGeneralLabels(data.generalLabels)
         setFacebookData(data.facebookData)
