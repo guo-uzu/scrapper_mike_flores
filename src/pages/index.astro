@@ -2,7 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 import GeneralLabels from "../components/GeneralLabels.tsx"
 import MetaGeneralLogo from "../assets/MetaGeneralLogo.svg"
+import YoutubeGeneralLogo from "../assets/YoutubeGeneralLogo.svg"
+import GeneralYoutube from "../components/GeneralYoutube.tsx"
 import { Image } from 'astro:assets';
+const finalTexts = [
+    "Este es un resumen de los KPI's principales y se actualiza cada 12 horas de manera automática.",
+    "Las fotografías en solitario se pautan por el objetivo de interacción.",
+    " Los videos únicamente se pueden pautar por el objetivo de reproducciones.",
+    "El costo por reacción varía según el contenido del que se trate.",
+    "No hay costos fijos en redes.",
+    "Esta herramienta es limitada a dicha información, mientras que detalles como el rendimiento y análisis se realizarán en cada reporte mensual."
+  ]
+
 ---
 
 <Layout>
@@ -15,5 +26,22 @@ import { Image } from 'astro:assets';
     <section>
       <GeneralLabels client:only/> 
     </section>
+    <div class="flex flex-col items-center justify-center gap-4 pt-5 max-w-[600px] mx-auto">
+      <Image class="w-[90px]" src={YoutubeGeneralLogo} alt="Logo de meta"/>
+      <h1 class="text-center text-8xl max-[425px]:text-6xl font-bold">Mike Flores</h1>
+      <p class="text-zinc-500 text-5xl max-[425px]:text-3xl text-center font-light">Dashboard de anuncios pautados en Youtube</p>
+    </div>
+    <section>
+      <GeneralYoutube client:only/> 
+    </section>
+    <div class="max-w-[700px] mx-auto p-4">
+      <ul class="bg-white w-full p-10 rounded-2xl">
+          {
+            finalTexts.map((text) => (
+              <li class="list-disc list-inside marker:text-blue-600 bg-transparent font-light text-md">{text}</li>
+            ))
+          }
+        </ul>
+      </div>
   </main>
 </Layout>
