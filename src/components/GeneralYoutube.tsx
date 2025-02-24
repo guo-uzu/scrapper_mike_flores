@@ -7,7 +7,7 @@ import YoutubeGeneral from "./YoutubeGeneral.tsx"
 import axios from "axios"
 
 const GeneralLabels: React.FC = () => {
-  const URL = "http://localhost:3001/"
+  const URL = "https://mf-api-71095185658.us-central1.run.app"
   const [youtubeData, setYoutubeData] = useState<string>("")
   const [youtubeDataLabels, setYoutubeLabels] = useState<string>("")
   const [loadingYt, setLoadingYt] = useState(true)
@@ -18,7 +18,7 @@ const GeneralLabels: React.FC = () => {
   useEffect(() => {
     const fetchDataYt = async () => {
       try {
-        const { data } = await axios.get(`${URL}scrape-yt/`, {
+        const { data } = await axios.get(`${URL}/scrape-yt/`, {
           headers: { 'X-Requested-With': 'XMLHttpRequest' },
         })
         console.log(data)

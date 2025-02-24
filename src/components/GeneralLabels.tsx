@@ -9,7 +9,7 @@ import YoutubeGeneralLabels from "./YoutubeGeneralLabels.tsx"
 import axios from "axios"
 
 const GeneralLabels: React.FC = () => {
-  const URL = "http://localhost:3001/"
+  const URL = "https://mf-api-71095185658.us-central1.run.app"
   const [generalLabels, setGeneralLabels] = useState<{ title: string, value: string }[]>([])
   const [facebookData, setFacebookData] = useState<string>("")
   const [instaData, setInstagramData] = useState<string>("")
@@ -23,7 +23,7 @@ const GeneralLabels: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${URL}scrape/`, {
+        const { data } = await axios.get(`${URL}/scrape/`, {
           headers: { 'X-Requested-With': 'XMLHttpRequest' },
         })
         setGeneralLabels(data.generalLabels)
